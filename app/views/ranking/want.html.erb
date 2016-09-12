@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="container-inner inner-default clearfix rankingCounter">
+    <h2>Wantランキング</h2>
+    <% @rankings.each do |ranking| %>
+      <div class="item-box">
+        <div class="howMany"><%= ranking.item_count %>人がWant</div>
+        <div class="image">
+          <div class="img-wrap">
+            <% unless ranking.item.large_image.nil? %>
+              <%= image_tag(ranking.item.large_image , alt: ranking.item.title) %>
+            <% else %>
+              <%= image_tag("no-image.png" , alt: ranking.item.title) %>
+            <% end %>
+          </div>
+        </div>
+        <div class="detail">
+          <p class="title">
+            <%= ranking.item.title %>
+          </p>
+        </div>
+        <%= render 'items/action' , item: ranking.item if logged_in? %>
+      </div>
+    <% end %>
+  </div>
+</div>
